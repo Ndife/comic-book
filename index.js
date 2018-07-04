@@ -9,9 +9,7 @@ const app = express();
 const url = 'mongodb://localhost:27017/comic-gallery';
 
 var indexRouter = require('./routes/index');
-var booksRouter = require('./routes/users');
-var postsRouter = require('./routes/posts');
-var commentsRouter = require('./routes/comments');
+var booksRouter = require('./routes/books');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -21,6 +19,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect(url);
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/posts', postsRouter);
-app.use('/comments', commentsRouter);
+app.use('/books', booksRouter);
+
+app.listen(process.env.PORT || 3000);
+console.log('starting applicaiton.  Good job!');
