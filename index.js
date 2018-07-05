@@ -5,8 +5,13 @@ const path = require('path');
 //const expressValidator = require('express-validator');
 const mongoose = require('mongoose');
 //const Signature = require('./models/signature.js')
+
+app.listen(process.env.PORT || 3000, function(){
+    console.log('starting application.  Good job!');
+});
+
 const app = express();
-const url = 'mongodb://localhost:27017/comic-gallery';
+const url = 'mongodb://Ndife:g0dsw1ll@ds227821.mlab.com:27821/comic-book';
 
 
 var subscribersRouter = require('./routes/subscribers');
@@ -20,6 +25,3 @@ mongoose.connect(url);
 
 app.use('/books', booksRouter);
 app.use('/subscribers', subscribersRouter);
-
-app.listen(process.env.PORT || 3000);
-console.log('starting applicaiton.  Good job!');
