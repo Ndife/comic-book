@@ -14,7 +14,7 @@ const url = 'mongodb://Ndife:g0dsw1ll@ds227821.mlab.com:27821/comic-book';
 
 var subscribersRouter = require('./routes/subscribers');
 var booksRouter = require('./routes/books.js');
-//var SubscriberController = require('../controllers/SubscriberController');
+var SubscriberController = require('../controllers/SubscriberController');
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -28,7 +28,7 @@ app.use(function(req, res, next) {
 mongoose.Promise = global.Promise;
 mongoose.connect(url);
 
-//app.use('/books', booksRouter);
+app.use('/books', booksRouter);
 // app.post('/subscribers/add', function(req, res, next){
 //     SubscriberController.addSubscriber(req, res);
 // }

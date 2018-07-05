@@ -12,5 +12,6 @@ exports.getBookByid = function(req, res){
 exports.getAllBooks = function(req, res){
     model.find({}, '-__v', function(err, books){
         if (err) res.json({err:err, message:'sorry, could not return all books'});
+        res.json({message:'books'})
     });
 }
