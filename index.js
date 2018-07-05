@@ -36,7 +36,7 @@ mongoose.connect(url);
 // );
 
 app.get('/books', function(req, res){
-    booksController.getAllBooks();
+    booksController.getAllBooks;
 });
 
 app.listen(port,()=>{
