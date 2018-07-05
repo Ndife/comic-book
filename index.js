@@ -14,31 +14,24 @@ const url = 'mongodb://Ndife:g0dsw1ll@ds227821.mlab.com:27821/comic-book';
 
 var subscribersRouter = require('./routes/subscribers');
 var booksRouter = require('./routes/books.js');
-var SubscriberController = require('../controllers/SubscriberController');
-var booksController = require('../controllers/BooksController');
 
 app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Methods: POST, GET");
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });
-
 // app.use(express.json());
 // app.use(express.urlencoded({ extended: false }));
 
 mongoose.Promise = global.Promise;
 mongoose.connect(url);
-
-//app.use('/books', booksRouter);
-// app.post('/subscribers/add', function(req, res, next){
-//     SubscriberController.addSubscriber(req, res);
-// }
-// );
-
-app.get('/books', function(req, res){
-    booksController.getAllBooks;
+app.get('/', function(req, res){
+    res.json({message:"hello world"});
 });
 
 app.listen(port,()=>{
     console.log(`listening to port ${port}`);
 });
+// app.use('/books', booksRouter);
+// app.use('/subscribers', subscribersRouter);
