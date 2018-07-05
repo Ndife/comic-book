@@ -6,9 +6,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 //const Signature = require('./models/signature.js')
 
-app.listen(process.env.PORT || 3000, function(){
-    console.log('starting application.  Good job!');
-});
+const port = process.env.PORT ||3000;
 
 const app = express();
 const url = 'mongodb://Ndife:g0dsw1ll@ds227821.mlab.com:27821/comic-book';
@@ -24,6 +22,10 @@ mongoose.Promise = global.Promise;
 mongoose.connect(url);
 app.get('/', function(req, res){
     res.json({message:"hello world"});
+});
+
+app.listen(port,()=>{
+    console.log(`listening to port ${port}`);
 });
 // app.use('/books', booksRouter);
 // app.use('/subscribers', subscribersRouter);
