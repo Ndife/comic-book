@@ -5,6 +5,7 @@ var BookSchema = mongoose.Schema({
    bookBody: String,
    views: Number,
    time: Date,
+   image: String,
    category: {type: mongoose.Schema.Types.ObjectId, ref: 'Category'},
    comments:  [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}]
 });
