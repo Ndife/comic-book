@@ -13,6 +13,7 @@ exports.addSubscriber = function(req, res){
         email: req.body.email,
         preferences: []
     };
+    res.json({greet:'reached here...'})
     model.create(data, function(err, user){
         if (err) res.json({error:err});
         model.findById(user._id, function(err, result){
