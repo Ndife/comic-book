@@ -1,4 +1,5 @@
 var model = require('../models/Subscriber');
+
 var nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -7,15 +8,21 @@ var transporter = nodemailer.createTransport({
         pass: 'djangelonthebeats'
     }
   });
-
 exports.addSubscriber = function(req, res){
     var data = {
         email: req.body.email,
         preferences: []
     };
     model.create(data, function(err, user){
-        if (err) res.json({err:err, message:'error occured while creating user'});
-        res.json({message:'Subscriber added successfully.'});
+        if (err) res.json({error:err});
+        model.findById(user._id, function(err, result){
+            for (choice of req.body.preferences){
+                result.preferences.push(choice);
+            }
+            result.save();
+            if (err) res.json({err:err, message:'error occured while creating user'});
+            res.json({message:'Subscriber added successfully.'});
+        });
     });
 }
 
@@ -49,5 +56,3 @@ exports.sendNotification = function(req, res){
     });
     return res.json('notification sent');
 }
-//
-//
