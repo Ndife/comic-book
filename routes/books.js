@@ -1,5 +1,6 @@
 var express = require('express');
 const multer = require('multer');
+var model = require('../models/Book');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -18,8 +19,19 @@ var booksController = require('../controllers/BooksController');
 router.get('/', booksController.getAllBooks);
 
 router.post('/addBook',upload.single('image'), function (req, res, next) {
-   console.log(req.file);
-    res.status(200).json({message:'success'});
-    
-  });
+    var data = {
+   title: req.body.title,
+   bookBody: req.body.bookBody,
+   views: 0,
+   time: Date.now(),
+   image: req.file.filename,
+   category: req.body.category,
+   comments:  []
+}
+model.create(data,(err)=>{
+    if(err) res.json({err:err, message:'Failed to add book'});
+    res.json({message:'book added successfuly'});
+});
+    });
+
 module.exports = router;
