@@ -17,11 +17,13 @@ const url = 'mongodb://Ndife:g0dsw1ll@ds227821.mlab.com:27821/comic-book';
 var subscribersRouter = require('./routes/subscribers');
 var booksRouter = require('./routes/books.js');
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
 
 mongoose.Promise = global.Promise;
 mongoose.connect(url);
-
-app.use('/books', booksRouter);
-app.use('/subscribers', subscribersRouter);
+app.get('/', function(req, res){
+    res.json({message:"hello world"});
+});
+// app.use('/books', booksRouter);
+// app.use('/subscribers', subscribersRouter);
