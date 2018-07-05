@@ -33,5 +33,5 @@ app.get('/', function(req, res){
 app.listen(port,()=>{
     console.log(`listening to port ${port}`);
 });
-// app.use('/books', booksRouter);
+app.use('/books', booksRouter);
 // app.use('/subscribers', subscribersRouter);
