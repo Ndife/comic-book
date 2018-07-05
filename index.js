@@ -29,7 +29,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect(url);
 
 //app.use('/books', booksRouter);
-app.post('/subscribers/add', SubscriberController.addSubscriber);
+app.post('/subscribers/add', SubscriberController.addSubscriber());
 
 app.get('/', function(req, res){
     res.json({message:"hello world"});
