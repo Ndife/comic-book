@@ -19,6 +19,7 @@ var booksController = require('../controllers/BooksController');
 router.get('/', booksController.getAllBooks);
 router.get('/getBookByParam', booksController.getBookByParam);
 router.get('/search/:value', booksController.searchBook);
+router.get('/deleteBook/:id',booksController.deleteBook);
 router.post('/addBook',upload.single('image'), function (req, res, next) {
     var data = {
    title: req.body.title,
