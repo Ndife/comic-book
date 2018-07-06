@@ -17,3 +17,11 @@ exports.getAllBooks = function(req, res){
         res.json({message:'books'})
     });
 }
+
+exports.getBookByParam = function(req,res){
+    option = req.query;
+    model.find(option, '-__v', function(err,books){
+        if(err) res.json({err:err, message:'cannot getBook by Params'});
+        res.json(books);
+    })
+}
