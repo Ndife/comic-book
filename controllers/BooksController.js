@@ -1,8 +1,6 @@
 var model = require('../models/Book');
 //var service = require('../services/UserService');
 //const Joi = require('joi');
-const multer = require('multer');
-const upload = multer({ dest: 'uploads/' });
 
 exports.getBookByid = function(req, res){
     var id = res.params.id;
