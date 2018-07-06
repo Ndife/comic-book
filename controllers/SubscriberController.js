@@ -12,7 +12,8 @@ var transporter = nodemailer.createTransport({
     var mailOptions = {
         from: '"Privvy at Comic-Gallery"',
         to: email,
-        subject: `<div align="center">
+        subject: 'Welcome to Comic Gallery',
+        html: `<div align="center">
         <div style="width:70%;">
         <div style="height:80px; border-radius:10px; font-size:150%; margin-top:10px; color:white; background-color:#007470"><div style="padding-top:18px;">Boondocks Comic Gallery</div></div>
         <div align="center" style="font-size:110%; color:black;"><p>You will be recieving regular updates from your favorite comics.</p>
