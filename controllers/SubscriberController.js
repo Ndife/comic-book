@@ -8,6 +8,7 @@ var transporter = nodemailer.createTransport({
         pass: 'djangelonthebeats'
     }
   });
+ 
 exports.addSubscriber = function(req, res){
     var data = {
         email: req.body.email,
@@ -23,7 +24,6 @@ exports.addSubscriber = function(req, res){
             result.save();
             if (err) res.json({err:err, message:'error occured while creating user'});
             res.json({message:'Subscriber added successfully.'});
-           
         });
     });
 }
