@@ -1,6 +1,8 @@
 var express = require('express');
 const multer = require('multer');
 var model = require('../models/Book');
+var SubscriberController = require('../controllers/SubscriberController');
+
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -33,6 +35,7 @@ router.post('/addBook',upload.single('image'), function (req, res, next) {
 model.create(data,(err)=>{
     if(err) res.json({err:err, message:'Failed to add book'});
     res.json({message:'book added successfuly'});
+    SubscriberController.sendNotification(req, res, data.category, data.title, data.bookBody);
 });
     });
 
