@@ -8,24 +8,53 @@ var transporter = nodemailer.createTransport({
         pass: 'djangelonthebeats'
     }
   });
- 
+  function subscriberAdded(email){
+    var mailOptions = {
+        from: '"Privvy at Comic-Gallery"',
+        to: email,
+        subject: 'Welcome to Comic Gallery',
+        html: `<h1></h1> <h3><i>Greetings from TeamBoondocks</i></h3>`+
+        `<p>If you don\'t want to see this notification again, you can <a href=\'https://comic-buk.herokuapp.com/subscribers/unsubscribe/${email}\'>Unsubscribe</a></p>`
+      };
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+          return false;
+        } else {
+          console.log('Email sent: ' + info.response);
+          return true;
+        }
+      });
+}
+
 exports.addSubscriber = function(req, res){
     var data = {
         email: req.body.email,
-        preferences: []
+        preferences: req.body.preferences
     };
-    //res.json({greet:'reached here...'})
-    model.create(data, function(err, user){
-        //if (err) res.json({error:err});
-        model.findById(user._id, function(err, result){
-           for (choice of req.body.preferences.split(',')){
-                result.preferences.push(choice);
-            }
-            result.save();
-            if (err) res.json({err:err, message:'error occured while creating user'});
-            res.json({message:'Subscriber added successfully.'});
-        });
+
+    var subscriber = new model(data);
+    subscriber.save(function(err){
+        if(!err && subscriberAdded(subscriber.email)){
+            res.json({message: 'the thing work oh!'});
+        } else{
+            res.json(err);
+        }
+        
     });
+    // model.create(data, function(err, user){
+
+    //     model.findById(user._id, function(err, result){
+    //        for (choice of req.body.preferences.split(',')){
+    //             result.preferences.push(choice);
+    //         }
+    //         result.save();
+    //         if (err) res.json({err:err, message:'error occured while creating user'});
+    //         subscriberAdded(data.email);
+    //         res.json({message:'Subscriber added successfully.'});
+           
+    //     });
+    // });
 }
 
 exports.deleteSubscriber = function(req, res){
