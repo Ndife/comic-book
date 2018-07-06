@@ -36,25 +36,29 @@ exports.deleteSubscriber = function(req, res){
     });
 }
 
-exports.sendNotification = function(req, res){
-    
-    model.find({}, '-_id -preferences -__v', function(err, users){
+exports.sendNotification = function(req, res, category, bookTitle, BookBody){
+
+    model.find({}, '-_id -__v', function(err, users){
         if (err) res.json({err:err, message:'error while retrieving users'})
         for (recipient of users){
-            var mailOptions = {
-                from: '"Privvy at Comic-Gallery"',
-                to: recipient,
-                subject: 'New Comic Updates',
-                html: '<h1>Hi there,</h1> <p>Hello from ComicGallery</p> <h1><i>TeamBoondocks</i></h1>'+
-                `<a href=\'http://comic-gallery/unsubscribe/${recipient['email']}\'>Unsubscribe</a>`
-              };
-              transporter.sendMail(mailOptions, function(error, info){
-                if (error) {
-                  console.log(error);
-                } else {
-                  console.log('Email sent: ' + info.response);
-                }
-              });
+            if(recipient.preferences.includes(category)){
+                var mailOptions = {
+                    from: '"Privvy at Comic-Gallery"',
+                    to: recipient,
+                    subject: 'New Comic Update',
+                    html: `<h1>Hello, ${bookTitle} has been added to your favorite collection</h1> <h3><i>Greetings from TeamBoondocks</i></h3>`+
+                    `<p>If you don\'t want to see this notification again, you can <a href=\'https://comic-buk.herokuapp.com/subscribers/unsubscribe/${recipient['email']}\'>Unsubscribe</a></p>`
+                  };
+                  transporter.sendMail(mailOptions, function(error, info){
+                    if (error) {
+                      console.log(error);
+                    } else {
+                      console.log('Email sent: ' + info.response);
+                    }
+                  });
+            }else{
+                //do nothing
+            }     
         }
     });
     return res.json('notification sent');
