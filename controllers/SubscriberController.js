@@ -13,16 +13,17 @@ exports.addSubscriber = function(req, res){
         email: req.body.email,
         preferences: []
     };
-    res.json({greet:'reached here...'})
+    //res.json({greet:'reached here...'})
     model.create(data, function(err, user){
-        if (err) res.json({error:err});
+        //if (err) res.json({error:err});
         model.findById(user._id, function(err, result){
-            for (choice of req.body.preferences){
+           for (choice of req.body.preferences.split(',')){
                 result.preferences.push(choice);
             }
             result.save();
             if (err) res.json({err:err, message:'error occured while creating user'});
             res.json({message:'Subscriber added successfully.'});
+           
         });
     });
 }
