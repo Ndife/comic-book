@@ -31,3 +31,11 @@ exports.searchBook = function(req, res){
         res.json(books)
     });
 }
+
+exports.deleteBook = function(req,res){
+    var id = {_id:req.params.id};
+    model.remove(id,(err)=>{
+        if(err) res.json({err:err, message:'Failed to delete book'});
+        res.json({message:'book deleted successfully'});
+    });
+}
