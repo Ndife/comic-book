@@ -37,6 +37,7 @@ exports.deleteSubscriber = function(req, res){
 }
 
 exports.sendNotification = function(req, res){
+    
     model.find({}, '-_id -preferences -__v', function(err, users){
         if (err) res.json({err:err, message:'error while retrieving users'})
         for (recipient of users){
