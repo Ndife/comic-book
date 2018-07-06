@@ -13,7 +13,7 @@ var transporter = nodemailer.createTransport({
         from: '"Privvy at Comic-Gallery"',
         to: email,
         subject: 'Welcome to Comic Gallery',
-        html: `<h1></h1> <h3><i>Greetings from TeamBoondocks</i></h3>`+
+        html: `<h1>Thank you for subscribing !</h1><p>You will be recieving regular updates from your favorite comics. Remember to Stay Cool and Warm...</p> <h3><i>Greetings from TeamBoondocks</i></h3>`+
         `<p>If you don\'t want to see this notification again, you can <a href=\'https://comic-buk.herokuapp.com/subscribers/unsubscribe/${email}\'>Unsubscribe</a></p>`
       };
       transporter.sendMail(mailOptions, function(error, info){
@@ -42,19 +42,6 @@ exports.addSubscriber = function(req, res){
         }
         
     });
-    // model.create(data, function(err, user){
-
-    //     model.findById(user._id, function(err, result){
-    //        for (choice of req.body.preferences.split(',')){
-    //             result.preferences.push(choice);
-    //         }
-    //         result.save();
-    //         if (err) res.json({err:err, message:'error occured while creating user'});
-    //         subscriberAdded(data.email);
-    //         res.json({message:'Subscriber added successfully.'});
-           
-    //     });
-    // });
 }
 
 exports.deleteSubscriber = function(req, res){
@@ -75,7 +62,7 @@ exports.sendNotification = function(req, res, category, bookTitle, BookBody){
                     from: '"Privvy at Comic-Gallery"',
                     to: recipient,
                     subject: 'New Comic Update',
-                    html: `<h1>Hello, ${bookTitle} has been added to your favorite collection</h1> <h3><i>Greetings from TeamBoondocks</i></h3>`+
+                    html: `<h1>Hello, ${bookTitle} has been added to your favorite collection</h1><p>${BookBody}</P><h3><i>Greetings from TeamBoondocks</i></h3>`+
                     `<p>If you don\'t want to see this notification again, you can <a href=\'https://comic-buk.herokuapp.com/subscribers/unsubscribe/${recipient['email']}\'>Unsubscribe</a></p>`
                   };
                   transporter.sendMail(mailOptions, function(error, info){
