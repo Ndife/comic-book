@@ -25,3 +25,11 @@ exports.getBookByParam = function(req,res){
         res.json(books);
     })
 }
+
+exports.searchBook = function(req, res){
+	var value= req.params.value;
+    model.find({"title":{$regex: value, $options: 'i'}}, '-__v', function(err, books){
+        if (err) res.json({err:err, message:'sorry, could not find books'});
+        res.json(books)
+    });
+}
