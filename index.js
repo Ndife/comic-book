@@ -9,8 +9,8 @@ const mongoose = require('mongoose');
 const port = process.env.PORT ||3000;
 
 const app = express();
-//const url = 'mongodb://Ndife:g0dsw1ll@ds227821.mlab.com:27821/comic-book';
-const url = 'mongodb://localhost:27017/comic-book';
+const url = 'mongodb://Ndife:g0dsw1ll@ds227821.mlab.com:27821/comic-book';
+// const url = 'mongodb://localhost:27017/comic-book';
 
 
 var subscribersRouter = require('./routes/subscribers');
